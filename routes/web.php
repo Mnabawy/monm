@@ -22,10 +22,14 @@ Route::get('/', function () {
 
 Route::get('/create', function () {
 
-    $user = User::find(1);
-    $role = new Role(['name' => 'user']);
-
-    $user->roles()->save($role);
+    $user = User::create([
+        'name' => 'mohamed',
+        'email' => 'test@test.com',
+        'email_verfied_at' => '2021-04-05 13:28:00',
+        'password' => '123',
+        'created_at' => '2021-04-05 13:28:00',
+        'updated_at' => '2021-04-05 13:28:00'
+    ]);
 });
 
 Route::get('/read', function () {
@@ -38,13 +42,21 @@ Route::get('/read', function () {
 });
 
 
-Route::get('/update' ,function(){
+Route::get('/update', function () {
     $user = User::findOrFail(1);
     $user->name = 'ahmed';
     $user->save();
 });
 
-Route::get('/delete', function (){
+Route::get('/delete', function () {
     $user = User::findOrFail(1);
     $user->delete();
+});
+
+
+Route::get('/attach', function () {
+
+    $user = User::findOrFail(2);
+    $user->roles()->attach(3);
+
 });
